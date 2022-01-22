@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import com.nickson.bank.Amount;
 import com.nickson.bank.Balance;
@@ -33,13 +34,6 @@ public class TransactionsRecords implements TransactionRepository{
 	}
 	
 	@Override
-	public List<Transaction> getTransactionsFromId(Long accountId) {
-		return this.repository.stream()
-								.filter(transaction -> transaction.getAccountId() == accountId)
-								.toList();
-	}
-
-	@Override
 	public Optional<Transaction> getLastTransaction(Long accountId) {
 		return this.repository.stream()
 				.filter(transaction -> transaction.getAccountId() == accountId)
@@ -49,6 +43,27 @@ public class TransactionsRecords implements TransactionRepository{
 	@Override
 	public Boolean saveTransaction(Transaction transaction) {
 		return this.repository.add(transaction);
+	}
+
+	@Override
+	public List<Transaction> getTransactionsFromIdBetween(Long accountId, LocalDateTime startDate, LocalDateTime endDate) {
+		Predicate<Transaction> isAfter; 
+		Predicate<Transaction> isBefore; 
+		if (startDate==null) {
+			isAfter = t -> true;
+		} else {
+			isAfter = t -> t.getDate().isAfter(startDate);
+		}
+		if (endDate==null) {
+			isBefore = t -> true;
+		} else {
+			isBefore = t -> t.getDate().isBefore(endDate);
+		}
+		return this.repository.stream()
+								.filter(transaction -> transaction.getAccountId() == accountId)
+								.filter(isAfter)
+								.filter(isBefore)
+								.toList();
 	}
 
 }

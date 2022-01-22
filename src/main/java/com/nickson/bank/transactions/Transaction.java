@@ -78,4 +78,10 @@ public class Transaction {
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
+
+	@Override
+	public String toString() {
+		return "accountId=" + accountId + "| type=" + type + "| date=" + date + "| amount=" + amount
+				+ "| balance=" + balance;
+	}
 }

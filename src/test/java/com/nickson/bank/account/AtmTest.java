@@ -51,7 +51,29 @@ class AtmTest {
 
 	@Test
 	void testViewHistory() {
-		fail("Not yet implemented");
+		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 01, 00, 00, 00);
+		String expectedString = "accountId=1| type=DEPOSIT| date=2022-01-01T00:00| amount=1000.00| balance=1000.00\n" +
+								"accountId=1| type=DEPOSIT| date=2022-01-01T01:00| amount=1000.00| balance=2000.00\n" +	
+								"accountId=1| type=WITHDRAW| date=2022-01-01T02:00| amount=1000.00| balance=1000.00";
+		TransactionRepository repository = new TransactionsRecords();
+		Atm atm = new Atm(repository);
+		
+		String result = atm.viewHistory(1l, null, null);
+		
+		assertEquals(expectedString, result);
 	}
+	
+	@Test
+	void testViewHistoryBetweenDate() {
+		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 01, 00, 00, 00);
+		String expectedString = "accountId=1| type=DEPOSIT| date=2022-01-01T01:00| amount=1000.00| balance=2000.00";
+		TransactionRepository repository = new TransactionsRecords();
+		Atm atm = new Atm(repository);
+		
+		String result = atm.viewHistory(1l, now.plusMinutes(30), now.plusHours(2));
+		
+		assertEquals(expectedString, result);
+	}
+
 
 }

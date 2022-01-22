@@ -26,6 +26,11 @@ public class Balance {
 	}
 	
 	@Override
+	public String toString() {
+		return balance.toString();
+	}
+	
+	@Override
 	public int hashCode() {
 		return Objects.hash(balance, maximalOverdraft);
 	}

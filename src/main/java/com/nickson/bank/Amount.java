@@ -37,5 +37,10 @@ public class Amount {
 		Amount other = (Amount) obj;
 		return Objects.equals(value, other.value);
 	}
+
+	@Override
+	public String toString() {
+		return value.toString();
+	}
 	
 }

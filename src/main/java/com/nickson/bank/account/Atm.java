@@ -2,6 +2,7 @@ package com.nickson.bank.account;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.nickson.bank.Amount;
 import com.nickson.bank.Balance;
@@ -58,10 +59,13 @@ public class Atm implements BankAccountService{
 		// Save
 		this.transactionRepository.saveTransaction(newTransaction);
 	}
+	
 	@Override
 	public String viewHistory(Long accountId, LocalDateTime startDate, LocalDateTime endDate) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.transactionRepository.getTransactionsFromIdBetween(accountId, startDate, endDate)
+											.stream()
+											.map(Transaction::toString)
+											.collect(Collectors.joining("\n"));
 	}
 	
 }

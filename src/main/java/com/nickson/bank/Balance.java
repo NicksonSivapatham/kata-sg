@@ -2,7 +2,7 @@ package com.nickson.bank;
 
 import java.math.BigDecimal;
 
-import com.nickson.bank.account.InsufficientFundsException;
+import com.nickson.bank.account.exception.InsufficientFundsException;
 
 public class Balance {
 	

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.nickson.bank.account.InvalidAmountException;
+import com.nickson.bank.account.exception.InvalidAmountException;
 
 class AmountTest {
 

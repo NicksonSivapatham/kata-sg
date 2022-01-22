@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 
-import com.nickson.bank.account.InsufficientFundsException;
-import com.nickson.bank.account.InvalidAmountException;
+import com.nickson.bank.account.exception.InsufficientFundsException;
+import com.nickson.bank.account.exception.InvalidAmountException;
 
 class BalanceTest {
 

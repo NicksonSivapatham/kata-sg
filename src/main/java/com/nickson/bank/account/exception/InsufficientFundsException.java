@@ -1,4 +1,4 @@
-package com.nickson.bank.account;
+package com.nickson.bank.account.exception;
 
 public class InsufficientFundsException extends Exception{
 

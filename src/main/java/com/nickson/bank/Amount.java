@@ -3,7 +3,7 @@ package com.nickson.bank;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import com.nickson.bank.account.InvalidAmountException;
+import com.nickson.bank.account.exception.InvalidAmountException;
 
 public class Amount {
 	

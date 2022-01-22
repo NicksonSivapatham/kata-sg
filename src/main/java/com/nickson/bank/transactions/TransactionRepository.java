@@ -24,4 +24,11 @@ public interface TransactionRepository {
 	 * @return Optional<Transaction>
 	 */
 	public Optional<Transaction> getLastTransaction(Long accountId);
+	
+	/**
+	 * Save a new transaction to the repository
+	 * @param transaction
+	 * @return
+	 */
+	public Boolean saveTransaction(Transaction transaction);
 }

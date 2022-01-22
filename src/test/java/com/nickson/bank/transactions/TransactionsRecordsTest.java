@@ -33,16 +33,31 @@ class TransactionsRecordsTest {
 	@Test
 	void testGetLastTransaction() throws InvalidAmountException, InsufficientFundsException {
 		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 01, 00, 00, 00);
-		Transaction expectedTransactions = new Transaction(1l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000));
+		Transaction expectedTransaction = new Transaction(1l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000));
 		TransactionsRecords repository = new TransactionsRecords();
 		
 		Optional<Transaction> result = repository.getLastTransaction(1l);
 		
-		assertEquals(expectedTransactions, result.get());
+		assertEquals(expectedTransaction, result.get());
 		
 		result = repository.getLastTransaction(4l);
 		
 		assertTrue(result.isEmpty());
 	}
 
+	@Test
+	void testGetSaveTransaction() throws InvalidAmountException, InsufficientFundsException {
+		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 01, 00, 00, 00);
+		Transaction transaction = new Transaction(5l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000));
+		TransactionsRecords repository = new TransactionsRecords();
+		
+		Optional<Transaction> result = repository.getLastTransaction(5l);
+		
+		assertTrue(result.isEmpty());
+		
+		repository.saveTransaction(transaction);
+		result = repository.getLastTransaction(5l);
+		
+		assertFalse(result.isEmpty());
+	}
 }

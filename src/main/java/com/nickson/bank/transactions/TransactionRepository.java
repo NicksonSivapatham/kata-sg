@@ -1,8 +1,9 @@
 package com.nickson.bank.transactions;
 
-import com.nickson.bank.account.BankAccount;
+import java.util.List;
 
 public interface TransactionRepository {
 	
-	public BankAccount getTransactionsFromId(Long accountId);
+	public List<Transaction> getTransactionsFromId(Long accountId);
+	public Transaction getLastTransaction(Long accountId);
 }

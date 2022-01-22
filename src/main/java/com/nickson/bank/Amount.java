@@ -9,7 +9,7 @@ import com.nickson.bank.account.exception.InvalidAmountException;
 public class Amount {
 	
 	private final BigDecimal value;
-	
+
 	public Amount(int value) throws InvalidAmountException {
 		if (value < 0) {
 			throw new InvalidAmountException("The amount is negative");

@@ -54,10 +54,19 @@ public class Balance {
 		this.maximalOverdraft = maximalOverdraft;
 	}
 
+	/**
+	 * Add to balance
+	 * @param amount
+	 */
 	public void add(Amount amount) {
 		this.balance = getBalance().add(amount.getValue());
 	}
 	
+	/**
+	 * Withdraw from balance
+	 * @param amount
+	 * @throws InsufficientFundsException
+	 */
 	public void substract(Amount amount) throws InsufficientFundsException {
 		BigDecimal newBalance = getBalance().subtract(amount.getValue());
 		if(newBalance.compareTo(maximalOverdraft) < 0) {

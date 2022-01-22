@@ -23,7 +23,7 @@ class TransactionsRecordsTest {
 				new Transaction(1l, Transaction.Operation.DEPOSIT, now, new Amount(1000), new Balance(1000)),
 				new Transaction(1l, Transaction.Operation.DEPOSIT, now.plusHours(1), new Amount(1000), new Balance(2000)),
 				new Transaction(1l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000)));
-		TransactionsRecords repository = new TransactionsRecords();
+		TransactionsRecords repository = TransactionsRecords.getInstance();
 		
 		List<Transaction> result = repository.getTransactionsFromId(1l);
 		
@@ -34,7 +34,7 @@ class TransactionsRecordsTest {
 	void testGetLastTransaction() throws InvalidAmountException, InsufficientFundsException {
 		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 01, 00, 00, 00);
 		Transaction expectedTransaction = new Transaction(1l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000));
-		TransactionsRecords repository = new TransactionsRecords();
+		TransactionsRecords repository = TransactionsRecords.getInstance();
 		
 		Optional<Transaction> result = repository.getLastTransaction(1l);
 		
@@ -49,7 +49,7 @@ class TransactionsRecordsTest {
 	void testGetSaveTransaction() throws InvalidAmountException, InsufficientFundsException {
 		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 01, 00, 00, 00);
 		Transaction transaction = new Transaction(5l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000));
-		TransactionsRecords repository = new TransactionsRecords();
+		TransactionsRecords repository = TransactionsRecords.getInstance();
 		
 		Optional<Transaction> result = repository.getLastTransaction(5l);
 		

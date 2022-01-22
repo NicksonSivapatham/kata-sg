@@ -15,8 +15,9 @@ import com.nickson.bank.account.exception.InvalidAmountException;
 public class TransactionsRecords implements TransactionRepository{
 	
 	private List<Transaction> repository;
+	private static TransactionsRecords instance;
 	
-	public TransactionsRecords() {
+	private TransactionsRecords() {
 		super();
 		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 01, 00, 00, 00);
 		try {
@@ -31,7 +32,18 @@ public class TransactionsRecords implements TransactionRepository{
 			this.repository = new ArrayList<>();
 		}
 	}
-
+	
+	/**
+	 * Return an instance of the classe
+	 * @return
+	 */
+	public static TransactionsRecords getInstance() {
+		if (instance == null) {
+			instance = new TransactionsRecords();
+		}
+		return instance;
+	}
+	
 	@Override
 	public List<Transaction> getTransactionsFromId(Long accountId) {
 		return this.repository.stream()

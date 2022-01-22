@@ -1,6 +1,7 @@
 package com.nickson.bank;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 import com.nickson.bank.account.exception.InsufficientFundsException;
@@ -11,7 +12,7 @@ public class Balance {
 	BigDecimal maximalOverdraft;
 	
 	public Balance() {
-		this.balance = BigDecimal.ZERO;
+		this.balance = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN);
 		this.maximalOverdraft = BigDecimal.ZERO;
 	}
 	
@@ -20,7 +21,7 @@ public class Balance {
 		if(new BigDecimal(balance).compareTo(maximalOverdraft) < 0) {
 			throw new InsufficientFundsException("Your funds are insufficient");
 		}
-		this.balance = new BigDecimal(balance);
+		this.balance = new BigDecimal(balance).setScale(2, RoundingMode.HALF_EVEN);
 		
 	}
 	

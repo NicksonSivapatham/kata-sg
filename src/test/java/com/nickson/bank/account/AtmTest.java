@@ -21,7 +21,7 @@ class AtmTest {
 	void testDeposit() throws InvalidAmountException, InsufficientFundsException {
 		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 02, 00, 00, 00);
 		Atm atm = new Atm();
-		TransactionRepository repository = new TransactionsRecords();
+		TransactionRepository repository = TransactionsRecords.getInstance();
 		Transaction expectedTransaction = new Transaction(2l, Transaction.Operation.DEPOSIT, now, new Amount(50), new Balance(2050));
 		
 		atm.deposit(2l, new Amount(50));
@@ -37,7 +37,7 @@ class AtmTest {
 	void testWithdraw() throws InvalidAmountException, InsufficientFundsException {
 		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 02, 00, 00, 00);
 		Atm atm = new Atm();
-		TransactionRepository repository = new TransactionsRecords();
+		TransactionRepository repository = TransactionsRecords.getInstance();
 		Transaction expectedTransaction = new Transaction(2l, Transaction.Operation.WITHDRAWAL, now, new Amount(50), new Balance(1950));
 		
 		atm.deposit(2l, new Amount(50));

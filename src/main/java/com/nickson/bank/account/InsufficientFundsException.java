@@ -1,13 +1,13 @@
 package com.nickson.bank.account;
 
-public class InsufficientBalanceException extends Exception{
+public class InsufficientFundsException extends Exception{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2656109934898150519L;
 
-	public InsufficientBalanceException(String message) {
+	public InsufficientFundsException(String message) {
 		super(message);
 	}
 }

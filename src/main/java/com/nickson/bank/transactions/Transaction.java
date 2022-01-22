@@ -10,7 +10,7 @@ public class Transaction {
 	
 	 public enum Operation {
 	        DEPOSIT,
-	        WITHDRAWAL
+	        WITHDRAW
 	 }
 	 
 	 private Long accountId;

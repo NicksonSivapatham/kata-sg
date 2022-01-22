@@ -22,8 +22,8 @@ class TransactionsRecordsTest {
 		List<Transaction> expectedTransactions = List.of(
 				new Transaction(1l, Transaction.Operation.DEPOSIT, now, new Amount(1000), new Balance(1000)),
 				new Transaction(1l, Transaction.Operation.DEPOSIT, now.plusHours(1), new Amount(1000), new Balance(2000)),
-				new Transaction(1l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000)));
-		TransactionsRecords repository = TransactionsRecords.getInstance();
+				new Transaction(1l, Transaction.Operation.WITHDRAW, now.plusHours(2), new Amount(1000), new Balance(1000)));
+		TransactionRepository repository = new TransactionsRecords();
 		
 		List<Transaction> result = repository.getTransactionsFromId(1l);
 		
@@ -33,9 +33,8 @@ class TransactionsRecordsTest {
 	@Test
 	void testGetLastTransaction() throws InvalidAmountException, InsufficientFundsException {
 		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 01, 00, 00, 00);
-		Transaction expectedTransaction = new Transaction(1l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000));
-		TransactionsRecords repository = TransactionsRecords.getInstance();
-		
+		Transaction expectedTransaction = new Transaction(1l, Transaction.Operation.WITHDRAW, now.plusHours(2), new Amount(1000), new Balance(1000));
+		TransactionRepository repository = new TransactionsRecords();
 		Optional<Transaction> result = repository.getLastTransaction(1l);
 		
 		assertEquals(expectedTransaction, result.get());
@@ -48,8 +47,8 @@ class TransactionsRecordsTest {
 	@Test
 	void testGetSaveTransaction() throws InvalidAmountException, InsufficientFundsException {
 		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 01, 00, 00, 00);
-		Transaction transaction = new Transaction(5l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000));
-		TransactionsRecords repository = TransactionsRecords.getInstance();
+		Transaction transaction = new Transaction(5l, Transaction.Operation.WITHDRAW, now.plusHours(2), new Amount(1000), new Balance(1000));
+		TransactionRepository repository = new TransactionsRecords();
 		
 		Optional<Transaction> result = repository.getLastTransaction(5l);
 		

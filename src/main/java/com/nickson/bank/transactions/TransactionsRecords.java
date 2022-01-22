@@ -16,16 +16,20 @@ public class TransactionsRecords implements TransactionRepository{
 	
 	private List<Transaction> repository;
 	
-	public TransactionsRecords() throws InvalidAmountException, InsufficientFundsException {
+	public TransactionsRecords() {
 		super();
 		LocalDateTime now = LocalDateTime.of(2022, Month.JANUARY, 01, 00, 00, 00);
-		this.repository = new ArrayList<>(List.of(
-				new Transaction(1l, Transaction.Operation.DEPOSIT, now, new Amount(1000), new Balance(1000)),
-				new Transaction(1l, Transaction.Operation.DEPOSIT, now.plusHours(1), new Amount(1000), new Balance(2000)),
-				new Transaction(1l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000)),
-				new Transaction(2l, Transaction.Operation.DEPOSIT, now.plusHours(1), new Amount(1000), new Balance(2000)),
-				new Transaction(3l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(200))
-				));
+		try {
+			this.repository = new ArrayList<>(List.of(
+					new Transaction(1l, Transaction.Operation.DEPOSIT, now, new Amount(1000), new Balance(1000)),
+					new Transaction(1l, Transaction.Operation.DEPOSIT, now.plusHours(1), new Amount(1000), new Balance(2000)),
+					new Transaction(1l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(1000)),
+					new Transaction(2l, Transaction.Operation.DEPOSIT, now.plusHours(1), new Amount(1000), new Balance(2000)),
+					new Transaction(3l, Transaction.Operation.WITHDRAWAL, now.plusHours(2), new Amount(1000), new Balance(200))
+					));
+		} catch (InvalidAmountException | InsufficientFundsException e) {
+			this.repository = new ArrayList<>();
+		}
 	}
 
 	@Override

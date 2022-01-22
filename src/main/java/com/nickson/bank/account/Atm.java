@@ -1,15 +1,19 @@
 package com.nickson.bank.account;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import com.nickson.bank.Amount;
 import com.nickson.bank.transactions.TransactionRepository;
+import com.nickson.bank.transactions.TransactionsRecords;
 
 public class Atm implements BankAccountService{
 	
 	private TransactionRepository transactionRepository;
 	
+	public Atm() {
+		super();
+		this.transactionRepository = new TransactionsRecords();
+	}
 	@Override
 	public void deposit(Long accountId, Amount amount) {
 		// TODO Auto-generated method stub

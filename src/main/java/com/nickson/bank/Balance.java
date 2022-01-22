@@ -1,6 +1,7 @@
 package com.nickson.bank;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import com.nickson.bank.account.exception.InsufficientFundsException;
 
@@ -12,6 +13,32 @@ public class Balance {
 	public Balance() {
 		this.balance = BigDecimal.ZERO;
 		this.maximalOverdraft = BigDecimal.ZERO;
+	}
+	
+	public Balance(Integer balance) throws InsufficientFundsException {
+		this.maximalOverdraft = BigDecimal.ZERO;
+		if(new BigDecimal(balance).compareTo(maximalOverdraft) < 0) {
+			throw new InsufficientFundsException("Your funds are insufficient");
+		}
+		this.balance = new BigDecimal(balance);
+		
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(balance, maximalOverdraft);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Balance other = (Balance) obj;
+		return Objects.equals(balance, other.balance) && Objects.equals(maximalOverdraft, other.maximalOverdraft);
 	}
 
 	public BigDecimal getBalance() {
